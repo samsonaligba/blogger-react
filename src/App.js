@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -9,6 +8,10 @@ import { connect } from 'react-redux';
 
 import { updateUser } from './actions/user-actions';
 
+//Import Views
+import Category from './views/Category'
+import Home from './views/Home'
+import PostDetail from './views/PostDetail'
 
 class App extends Component {
   constructor(props){
@@ -22,19 +25,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-          <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-          
-            <input onChange = {this.onUpdateUser} />
-        
-          {this.props.user}
-         </div>
+         <Switch>
+           <Route exact path='/' component={Home} />
+           <Route exact path='/:category' component={Category} />
+           <Route exact path='/:category/:post_id' component={PostDetail} />
+         </Switch>
       </BrowserRouter>
       
     );
